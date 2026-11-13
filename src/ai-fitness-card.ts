@@ -1,4 +1,4 @@
-import { LitElement, html, nothing, type PropertyValues } from "lit";
+import { LitElement, html, nothing } from "lit";
 
 import "./editor";
 import { dateKey, localeFor, todayHours } from "./format";
@@ -17,6 +17,7 @@ import {
   renderHeader,
   renderOccupancy,
   renderSection,
+  renderStatus,
   renderWeek,
 } from "./views";
 
@@ -54,23 +55,6 @@ class AiFitnessCard extends LitElement {
 
   static getConfigElement() {
     return document.createElement("ai-fitness-card-editor");
-  }
-
-  protected override updated(changed: PropertyValues) {
-    super.updated(changed);
-    if (!changed.has("_detailOpen")) {
-      return;
-    }
-
-    const dialog = this.renderRoot.querySelector("dialog");
-    if (!dialog) {
-      return;
-    }
-    if (this._detailOpen && !dialog.open) {
-      dialog.showModal();
-    } else if (!this._detailOpen && dialog.open) {
-      dialog.close();
-    }
   }
 
   render() {
@@ -189,21 +173,17 @@ class AiFitnessCard extends LitElement {
     weekCourses: Course[],
     ctx: ViewContext,
   ) {
-    return html`<dialog
-      class="detail-dialog"
-      @click=${this._dialogClick}
-      @close=${this._dialogClosed}
+    return html`<ha-dialog
+      .open=${this._detailOpen}
+      .headerTitle=${title}
+      .headerSubtitle=${hours}
+      width="large"
+      flexcontent
+      @closed=${this._dialogClosed}
     >
-      <button
-        class="detail-close"
-        aria-label="Close"
-        @click=${this._closeDetail}
-      >
-        ×
-      </button>
       <div class="detail-grid">
         <div class="detail-left">
-          ${renderHeader(title, open, hours, ctx)}
+          ${renderStatus(open, ctx)}
           ${renderOccupancy(occupancy, level, unavailable, ctx)}
           ${
             attrs.forecast_today?.length
@@ -249,21 +229,11 @@ class AiFitnessCard extends LitElement {
           }
         </div>
       </div>
-    </dialog>`;
+    </ha-dialog>`;
   }
 
   private _openDetail() {
     this._detailOpen = true;
-  }
-
-  private _closeDetail() {
-    this._detailOpen = false;
-  }
-
-  private _dialogClick(event: Event) {
-    if (event.target === event.currentTarget) {
-      this._detailOpen = false;
-    }
   }
 
   private _dialogClosed() {

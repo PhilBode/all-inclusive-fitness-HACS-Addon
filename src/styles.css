@@ -241,52 +241,11 @@ ha-card {
   cursor: pointer;
 }
 
-.detail-dialog {
-  position: fixed;
-  inset: 0;
-  width: min(1100px, calc(100% - 48px));
-  max-width: 1100px;
-  max-height: min(90vh, 900px);
-  margin: auto;
-  padding: 20px;
-  overflow: hidden;
-  color: var(--primary-text-color);
-  background: var(--card-background-color, #fff);
-  border: 0;
-  border-radius: var(--ha-card-border-radius, 12px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-}
-
-.detail-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.detail-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 1;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  color: var(--secondary-text-color);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  border-radius: 50%;
-}
-
-.detail-close:hover {
-  background: var(--secondary-background-color, #eee);
-}
-
 .detail-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px;
-  max-height: calc(min(90vh, 900px) - 40px);
+  height: min(70vh, 700px);
 }
 
 .detail-left,
@@ -296,8 +255,8 @@ ha-card {
   overflow-y: auto;
 }
 
-.detail-left .header {
-  padding-right: 32px;
+.status {
+  margin-bottom: 4px;
 }
 
 .detail-right {
@@ -310,20 +269,9 @@ ha-card {
 }
 
 @media (max-width: 700px) {
-  .detail-dialog {
-    width: 100vw;
-    max-width: none;
-    height: 100vh;
-    max-height: none;
-    margin: 0;
-    padding: 16px;
-    overflow-y: auto;
-    border-radius: 0;
-  }
-
   .detail-grid {
     display: block;
-    max-height: none;
+    height: auto;
   }
 
   .detail-left,

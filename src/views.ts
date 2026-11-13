@@ -21,6 +21,14 @@ export function renderHeader(
   </div>`;
 }
 
+export function renderStatus(open: boolean, ctx: ViewContext): TemplateResult {
+  return html`<div class="status">
+    <span class="badge ${open ? "open" : "closed"}">
+      ${open ? translate(ctx.language, "open") : translate(ctx.language, "closed")}
+    </span>
+  </div>`;
+}
+
 export function renderOccupancy(
   value: number | null,
   level: string,
