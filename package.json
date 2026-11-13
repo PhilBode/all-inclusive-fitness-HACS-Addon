@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild src/ai-fitness-card.ts --bundle --minify --legal-comments=none --format=esm --target=es2022 --outfile=custom_components/all_inclusive_fitness/www/ai-fitness-card.js && esbuild src/styles.css --outfile=custom_components/all_inclusive_fitness/www/ai-fitness-card.css",
+    "build": "esbuild src/ai-fitness-card.ts --bundle --minify --legal-comments=none --format=esm --target=es2022 --outfile=custom_components/all_inclusive_fitness/www/ai-fitness-card.js && esbuild src/styles.css --outfile=custom_components/all_inclusive_fitness/www/ai-fitness-card.css && prettier --write custom_components/all_inclusive_fitness/www/ai-fitness-card.js custom_components/all_inclusive_fitness/www/ai-fitness-card.css",
     "watch": "npm run build -- --watch",
     "check": "tsc --noEmit",
     "preview": "python3 -m http.server 8080"
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
+    "prettier": "^3.10.1",
     "typescript": "^5.9.3"
   }
 }

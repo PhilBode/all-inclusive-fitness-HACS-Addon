@@ -450,7 +450,7 @@ var Ft = (n, t) => {
         p,
         c = -1,
         f = 0;
-      for (; f < a.length && ((r.lastIndex = f), (p = r.exec(a)), p !== null); )
+      for (; f < a.length && ((r.lastIndex = f), (p = r.exec(a)), p !== null);)
         ((f = r.lastIndex),
           r === T
             ? p[1] === "!--"
@@ -506,7 +506,7 @@ var Ft = (n, t) => {
         let c = this.el.content.firstChild;
         c.replaceWith(...c.childNodes);
       }
-      for (; (i = w.nextNode()) !== null && a.length < h; ) {
+      for (; (i = w.nextNode()) !== null && a.length < h;) {
         if (i.nodeType === 1) {
           if (i.hasAttributes())
             for (let c of i.getAttributeNames())
@@ -542,7 +542,7 @@ var Ft = (n, t) => {
           if (i.data === At) a.push({ type: 2, index: o });
           else {
             let c = -1;
-            for (; (c = i.data.indexOf(y, c + 1)) !== -1; )
+            for (; (c = i.data.indexOf(y, c + 1)) !== -1;)
               (a.push({ type: 7, index: o }), (c += y.length - 1));
           }
         o++;
@@ -590,7 +590,7 @@ var V = class {
         r = 0,
         h = 0,
         a = s[0];
-      for (; a !== void 0; ) {
+      for (; a !== void 0;) {
         if (r === a.index) {
           let d;
           (a.type === 2
@@ -699,7 +699,7 @@ var V = class {
       i < e.length && (this._$AR(s && s._$AB.nextSibling, i), (e.length = i));
     }
     _$AR(t = this._$AA.nextSibling, e) {
-      for (this._$AP?.(!1, !0, e); t !== this._$AB; ) {
+      for (this._$AP?.(!1, !0, e); t !== this._$AB;) {
         let s = pt(t).nextSibling;
         (pt(t).remove(), (t = s));
       }
