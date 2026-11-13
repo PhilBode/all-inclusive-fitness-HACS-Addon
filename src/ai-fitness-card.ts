@@ -5,6 +5,7 @@ import { dateKey, localeFor, todayHours } from "./format";
 import { translate } from "./strings";
 import type {
   AiFitnessCardConfig,
+  Course,
   CourseAttributes,
   HomeAssistant,
   OccupancyAttributes,
@@ -25,10 +26,12 @@ class AiFitnessCard extends LitElement {
   static properties = {
     hass: { attribute: false },
     config: { attribute: false },
+    _detailOpen: { state: true },
   };
 
   declare hass?: HomeAssistant;
   declare config?: AiFitnessCardConfig;
+  private _detailOpen = false;
 
   static getStubConfig() {
     return {};
@@ -82,9 +85,12 @@ class AiFitnessCard extends LitElement {
       locale: localeFor(hass.language),
       timeZone: hass.config?.time_zone,
     };
-    const hours = showHours
-      ? todayHours(attrs.opening_hours, ctx.language, ctx.timeZone)
-      : "";
+    const fullHours = todayHours(
+      attrs.opening_hours,
+      ctx.language,
+      ctx.timeZone,
+    );
+    const hours = showHours ? fullHours : "";
 
     const courseEntity = this._findCourseEntity();
     const courseObj = courseEntity ? hass.states[courseEntity] : undefined;
@@ -95,7 +101,13 @@ class AiFitnessCard extends LitElement {
       (course) => dateKey(new Date(course.start), ctx.timeZone) !== todayKey,
     );
 
-    return html`${this._styleLink()}<ha-card>
+    return html`${this._styleLink()}
+      <ha-card
+        role="button"
+        tabindex="0"
+        @click=${this._openDetail}
+        @keydown=${this._handleCardKey}
+      >
         ${renderHeader(title, open, hours, ctx)}
         ${renderOccupancy(occupancy, level, unavailable, ctx)}
         ${
@@ -133,7 +145,119 @@ class AiFitnessCard extends LitElement {
               )
             : nothing
         }
-      </ha-card>`;
+      </ha-card>
+      ${
+        this._detailOpen
+          ? this._renderDetail(
+              title,
+              open,
+              fullHours,
+              occupancy,
+              level,
+              unavailable,
+              attrs,
+              todayCourses,
+              weekCourses,
+              ctx,
+            )
+          : nothing
+      }`;
+  }
+
+  private _renderDetail(
+    title: string,
+    open: boolean,
+    hours: string,
+    occupancy: number | null,
+    level: string,
+    unavailable: boolean,
+    attrs: OccupancyAttributes,
+    todayCourses: Course[],
+    weekCourses: Course[],
+    ctx: ViewContext,
+  ) {
+    return html`<div class="detail-overlay" @click=${this._overlayClick}>
+      <div class="detail-panel" role="dialog" aria-modal="true">
+        <button
+          class="detail-close"
+          aria-label="Close"
+          @click=${this._closeDetail}
+        >
+          ×
+        </button>
+        <div class="detail-grid">
+          <div class="detail-left">
+            ${renderHeader(title, open, hours, ctx)}
+            ${renderOccupancy(occupancy, level, unavailable, ctx)}
+            ${
+              attrs.forecast_today?.length
+                ? renderSection(
+                    translate(ctx.language, "today"),
+                    renderDayBars(attrs.forecast_today, ctx),
+                  )
+                : nothing
+            }
+            ${
+              attrs.forecast_week
+                ? renderWeek(attrs.forecast_week, ctx)
+                : nothing
+            }
+          </div>
+          <div class="detail-right">
+            ${
+              todayCourses.length
+                ? renderCourses(
+                    translate(ctx.language, "coursesToday"),
+                    todayCourses,
+                    50,
+                    false,
+                    ctx,
+                  )
+                : nothing
+            }
+            ${
+              weekCourses.length
+                ? renderCourses(
+                    translate(ctx.language, "coursesWeek"),
+                    weekCourses,
+                    50,
+                    true,
+                    ctx,
+                  )
+                : nothing
+            }
+            ${
+              !todayCourses.length && !weekCourses.length
+                ? html`<div class="empty">
+                    ${translate(ctx.language, "noCourses")}
+                  </div>`
+                : nothing
+            }
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  private _openDetail() {
+    this._detailOpen = true;
+  }
+
+  private _closeDetail() {
+    this._detailOpen = false;
+  }
+
+  private _overlayClick(event: Event) {
+    if (event.target === event.currentTarget) {
+      this._detailOpen = false;
+    }
+  }
+
+  private _handleCardKey(event: KeyboardEvent) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      this._detailOpen = true;
+    }
   }
 
   private _findOccupancyEntity(): string | undefined {

@@ -10,6 +10,7 @@ export const STRINGS = {
     noData: "Keine Daten",
     noSensor:
       "Kein Auslastungs-Sensor gefunden. Richte zuerst die Integration ein.",
+    noCourses: "Keine Kurse oder Events.",
     estimate: "geschätzt",
     full: "voll",
     running: "läuft",
@@ -30,6 +31,7 @@ export const STRINGS = {
     closedToday: "Closed today",
     noData: "No data",
     noSensor: "No occupancy sensor found. Set up the integration first.",
+    noCourses: "No courses or events.",
     estimate: "estimated",
     full: "full",
     running: "running",

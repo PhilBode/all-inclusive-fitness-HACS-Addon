@@ -76,6 +76,8 @@ The card finds the occupancy and course sensors automatically. Only one studio i
 
 All display options are available in the visual card editor.
 
+Click the card to open the detail view: occupancy and forecast on the left, scrollable courses and events on the right. On mobile it becomes one scrollable page.
+
 If your Home Assistant uses YAML-managed Lovelace resources, the integration cannot add the resource automatically. Add it manually:
 
 1. **Settings → Dashboards → Resources → Add resource**.
