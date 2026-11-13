@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Fitness Card Preview</title>
+    <style>
+      :root {
+        --primary-color: #03a9f4;
+        --secondary-text-color: #666;
+        --secondary-background-color: #eeeeee;
+        --error-color: #c62828;
+        --success-color: #2e7d32;
+        --warning-color: #f9a825;
+        --divider-color: rgba(0, 0, 0, 0.08);
+        --card-background-color: #ffffff;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #f2f2f2;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      #root {
+        width: min(100%, 420px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      class MockHaCard extends HTMLElement {
+        connectedCallback() {
+          if (this.shadowRoot) {
+            return;
+          }
+
+          const root = this.attachShadow({ mode: "open" });
+          root.innerHTML = `
+            <style>
+              :host {
+                display: block;
+                background: var(--card-background-color, #fff);
+                border-radius: var(--ha-card-border-radius, 12px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+              }
+              slot {
+                display: block;
+              }
+            </style>
+            <slot></slot>
+          `;
+        }
+      }
+
+      customElements.define("ha-card", MockHaCard);
+    </script>
+
+    <script type="module">
+      import "../custom_components/all_inclusive_fitness/www/ai-fitness-card.js";
+
+      const now = new Date();
+      const timeZone = "Europe/Berlin";
+      const weekday = new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        timeZone,
+      }).format(now);
+      const courseStart = new Date(now.getTime() + 60 * 60 * 1000);
+      const courseEnd = new Date(courseStart.getTime() + 50 * 60 * 1000);
+      const slotStart = `${String(now.getHours()).padStart(2, "0")}:00`;
+      const slotEnd = `${String((now.getHours() + 1) % 24).padStart(2, "0")}:00`;
+
+      const card = document.createElement("ai-fitness-card");
+      card.setConfig({
+        entity: "sensor.gym",
+        course_entity: "sensor.course",
+        title: "Bielefeld City",
+      });
+
+      card.hass = {
+        language: "de",
+        config: { time_zone: timeZone },
+        states: {
+          "sensor.gym": {
+            state: "28",
+            attributes: {
+              is_open: true,
+              occupancy_level: "low",
+              studio_name: "Bielefeld City",
+              forecast_today: [
+                { start: "15:00", end: "16:00", percentage: 28 },
+                {
+                  start: "16:00",
+                  end: "17:00",
+                  percentage: 41,
+                  is_estimate: true,
+                },
+                {
+                  start: "17:00",
+                  end: "18:00",
+                  percentage: 52,
+                  is_estimate: true,
+                },
+                {
+                  start: "18:00",
+                  end: "19:00",
+                  percentage: 67,
+                  is_estimate: true,
+                },
+              ],
+              forecast_week: {
+                [weekday.toUpperCase()]: [
+                  { start: slotStart, end: slotEnd, percentage: 28 },
+                ],
+              },
+              opening_hours: {
+                [weekday.toLowerCase()]: [{ start: "06:00", end: "24:00" }],
+              },
+            },
+          },
+          "sensor.course": {
+            state: "Cycling",
+            attributes: {
+              today: [
+                {
+                  name: "Cycling",
+                  start: courseStart.toISOString(),
+                  end: courseEnd.toISOString(),
+                  booked: 30,
+                  capacity: 30,
+                  is_full: true,
+                },
+              ],
+              week: [],
+            },
+          },
+        },
+      };
+
+      document.getElementById("root").append(card);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Studio suchen",
+        "description": "Suche nach Name oder Stadt. Danach werden passende Studios angezeigt.",
+        "data": {
+          "query": "Name oder Stadt"
+        }
+      },
+      "select": {
+        "title": "Studio auswählen",
+        "description": "Wähle das Studio aus, das du beobachten willst.",
+        "data": {
+          "studio": "Studio"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Die API ist nicht erreichbar. Prüfe die Verbindung und versuche es erneut.",
+      "unsupported_tenant": "Dieses Studio-Portal wird nicht unterstützt.",
+      "studio_not_found": "Das Studio wurde nicht gefunden.",
+      "no_studios_found": "Kein Studio passt zur Suche."
+    },
+    "abort": {
+      "already_configured": "Dieses Studio ist bereits eingerichtet.",
+      "no_studios_found": "Kein Studio passt zur Suche."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "All Inclusive Fitness Optionen",
+        "data": {
+          "scan_interval": "Aktualisierungsintervall in Sekunden"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "occupancy": {
+        "name": "Auslastung"
+      },
+      "occupancy_level": {
+        "name": "Auslastungs-Level"
+      },
+      "next_course": {
+        "name": "Nächster Kurs"
+      }
+    },
+    "binary_sensor": {
+      "is_open": {
+        "name": "Geöffnet"
+      }
+    }
+  },
+  "issues": {
+    "api_error": {
+      "title": "All Inclusive Fitness API-Problem",
+      "description": "Die API hat einen Fehler zurückgegeben: {error}. Die Integration versucht es automatisch erneut."
+    }
+  }
+}

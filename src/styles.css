@@ -1,0 +1,224 @@
+:host {
+  display: block;
+}
+
+ha-card {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--secondary-text-color);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge.open {
+  color: var(--success-color, #2e7d32);
+  background: rgba(46, 125, 50, 0.12);
+}
+
+.badge.closed {
+  color: var(--secondary-text-color);
+  background: var(--secondary-background-color, #eee);
+}
+
+.occupancy {
+  margin-top: 16px;
+}
+
+.occupancy .value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.occupancy .level {
+  font-size: 0.8rem;
+  color: var(--secondary-text-color);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+.occupancy.low .value {
+  color: var(--success-color, #2e7d32);
+}
+
+.occupancy.medium .value {
+  color: var(--warning-color, #f9a825);
+}
+
+.occupancy.high .value {
+  color: var(--error-color, #c62828);
+}
+
+.bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--secondary-background-color, #eee);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary-color);
+  transition: width 0.4s ease;
+}
+
+.section {
+  margin-top: 18px;
+}
+
+.section-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--secondary-text-color);
+  margin-bottom: 8px;
+}
+
+.daybars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 70px;
+}
+
+.daybar {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+}
+
+.daybar span {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 3px 3px 0 0;
+  background: var(--primary-color);
+  opacity: 0.85;
+}
+
+.daybar.estimate span {
+  opacity: 0.35;
+}
+
+.daybar small {
+  font-size: 0.55rem;
+  color: var(--secondary-text-color);
+}
+
+.courses {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.course {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.9rem;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.08));
+}
+
+.course:last-child {
+  border-bottom: none;
+}
+
+.course-time {
+  color: var(--secondary-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.course-name {
+  font-weight: 500;
+}
+
+.course-capacity {
+  color: var(--secondary-text-color);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--error-color, #c62828);
+  background: rgba(198, 40, 40, 0.1);
+}
+
+.tag.running {
+  color: var(--primary-color);
+  background: rgba(3, 169, 244, 0.12);
+}
+
+.weekrow {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 2.6rem;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+  font-size: 0.8rem;
+}
+
+.weekday {
+  color: var(--secondary-text-color);
+}
+
+.weekbar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--secondary-background-color, #eee);
+  overflow: hidden;
+}
+
+.weekbar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary-color);
+  opacity: 0.8;
+}
+
+.weekpct {
+  text-align: right;
+  color: var(--secondary-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.error {
+  color: var(--error-color, #c62828);
+}

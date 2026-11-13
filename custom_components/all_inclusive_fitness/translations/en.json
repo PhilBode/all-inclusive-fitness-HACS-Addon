@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Search studio",
+        "description": "Search by name or city. Matching studios are shown next.",
+        "data": {
+          "query": "Name or city"
+        }
+      },
+      "select": {
+        "title": "Select studio",
+        "description": "Pick the studio you want to monitor.",
+        "data": {
+          "studio": "Studio"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the API. Check your connection and try again.",
+      "unsupported_tenant": "This studio portal is not supported.",
+      "studio_not_found": "The studio was not found.",
+      "no_studios_found": "No studio matched your search."
+    },
+    "abort": {
+      "already_configured": "This studio is already configured.",
+      "no_studios_found": "No studio matched your search."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "All Inclusive Fitness options",
+        "data": {
+          "scan_interval": "Update interval in seconds"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "occupancy": {
+        "name": "Occupancy"
+      },
+      "occupancy_level": {
+        "name": "Occupancy level"
+      },
+      "next_course": {
+        "name": "Next course"
+      }
+    },
+    "binary_sensor": {
+      "is_open": {
+        "name": "Open"
+      }
+    }
+  },
+  "issues": {
+    "api_error": {
+      "title": "All Inclusive Fitness API problem",
+      "description": "The API returned an error: {error}. The integration will retry automatically."
+    }
+  }
+}
