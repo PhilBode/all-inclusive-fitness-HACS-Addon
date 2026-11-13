@@ -14,7 +14,6 @@ from .api import AiFitnessApi
 from .const import (
     CARD_PATH,
     CARD_STATIC_PATH,
-    CARD_URL,
     CONF_BASE_URL,
     CONF_SCAN_INTERVAL,
     CONF_TENANT,
@@ -67,7 +66,7 @@ async def _async_register_card(hass: HomeAssistant) -> None:
             StaticPathConfig(
                 CARD_STATIC_PATH,
                 str(card_path),
-                cache_headers=True,
+                cache_headers=False,
             )
         ]
     )
@@ -93,8 +92,8 @@ async def _async_register_resource(hass: HomeAssistant) -> None:
 
     for item in resources.async_items():
         if str(item.get("url", "")).split("?", 1)[0] == CARD_PATH:
-            if item.get("url") != CARD_URL and item.get("id"):
-                await resources.async_update_item(item["id"], {"url": CARD_URL})
+            if item.get("url") != CARD_PATH and item.get("id"):
+                await resources.async_update_item(item["id"], {"url": CARD_PATH})
             return
 
-    await resources.async_create_item({"res_type": "module", "url": CARD_URL})
+    await resources.async_create_item({"res_type": "module", "url": CARD_PATH})

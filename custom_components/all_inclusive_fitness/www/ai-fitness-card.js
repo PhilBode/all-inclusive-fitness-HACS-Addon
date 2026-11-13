@@ -1137,7 +1137,7 @@ function Ot(n, t) {
   }
   return e.length ? W(f(t.language, "week"), u`<div>${e}</div>`) : c;
 }
-var Xt = new URL("ai-fitness-card.css?v=0.1.2", import.meta.url).href,
+var Xt = new URL("ai-fitness-card.css", import.meta.url).href,
   nt = class extends $ {
     static {
       this.properties = { hass: { attribute: !1 }, config: { attribute: !1 } };
