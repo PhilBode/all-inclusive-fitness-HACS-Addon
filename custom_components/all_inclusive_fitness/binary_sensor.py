@@ -31,3 +31,9 @@ class IsOpenBinarySensor(AiFitnessEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         return self.coordinator.data.is_open if self.coordinator.data else None
+
+    @property
+    def icon(self) -> str:
+        if self.is_on is None:
+            return "mdi:door"
+        return "mdi:door-open" if self.is_on else "mdi:door-closed"
