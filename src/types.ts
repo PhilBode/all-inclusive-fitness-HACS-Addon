@@ -17,7 +17,6 @@ export interface AiFitnessCardConfig {
   show_courses?: boolean;
   show_week_courses?: boolean;
   show_hours?: boolean;
-  compact?: boolean;
 }
 
 export interface OpeningRange {

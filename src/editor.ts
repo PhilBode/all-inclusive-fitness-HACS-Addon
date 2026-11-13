@@ -8,8 +8,7 @@ type BooleanKey =
   | "show_week"
   | "show_courses"
   | "show_week_courses"
-  | "show_hours"
-  | "compact";
+  | "show_hours";
 
 class AiFitnessCardEditor extends LitElement {
   static properties = {
@@ -62,15 +61,11 @@ class AiFitnessCardEditor extends LitElement {
       ${this._toggle("show_courses", "editorCourses")}
       ${this._toggle("show_week_courses", "editorWeekCourses")}
       ${this._toggle("show_hours", "editorHours")}
-      ${this._toggle("compact", "editorCompact")}
     </div>`;
   }
 
   private _toggle(key: BooleanKey, label: StringKey) {
-    const checked =
-      key === "compact"
-        ? this.config?.compact === true
-        : this.config?.[key] !== false;
+    const checked = this.config?.[key] !== false;
 
     return html`<div class="row">
       <span class="row-label">${this._t(label)}</span>

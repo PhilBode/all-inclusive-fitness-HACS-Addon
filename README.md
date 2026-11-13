@@ -70,7 +70,6 @@ show_week: true
 show_courses: true
 show_week_courses: true
 show_hours: true
-compact: false
 ```
 
 The card finds the occupancy and course sensors automatically. Only one studio is supported per Home Assistant instance.

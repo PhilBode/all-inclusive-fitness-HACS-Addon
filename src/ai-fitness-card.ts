@@ -41,13 +41,12 @@ class AiFitnessCard extends LitElement {
       show_courses: true,
       show_week_courses: true,
       show_hours: true,
-      compact: false,
       ...config,
     };
   }
 
   getCardSize() {
-    return this.config?.compact ? 4 : 8;
+    return 8;
   }
 
   static getConfigElement() {
@@ -100,9 +99,7 @@ class AiFitnessCard extends LitElement {
         ${renderHeader(title, open, hours, ctx)}
         ${renderOccupancy(occupancy, level, unavailable, ctx)}
         ${
-          config.show_today_forecast !== false &&
-          !config.compact &&
-          attrs.forecast_today?.length
+          config.show_today_forecast !== false && attrs.forecast_today?.length
             ? renderSection(
                 translate(ctx.language, "today"),
                 renderDayBars(attrs.forecast_today, ctx),
@@ -126,10 +123,7 @@ class AiFitnessCard extends LitElement {
             : nothing
         }
         ${
-          config.show_courses !== false &&
-          config.show_week_courses !== false &&
-          weekCourses.length &&
-          !config.compact
+          config.show_week_courses !== false && weekCourses.length
             ? renderCourses(
                 translate(ctx.language, "coursesWeek"),
                 weekCourses,

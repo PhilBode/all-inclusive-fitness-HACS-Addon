@@ -1,15 +1,22 @@
 {
   "domain": "all_inclusive_fitness",
   "name": "All Inclusive Fitness",
-  "categories": ["health_wellbeing"],
-  "codeowners": ["@PhilBode"],
+  "categories": [
+    "health_wellbeing"
+  ],
+  "codeowners": [
+    "@PhilBode"
+  ],
   "config_flow": true,
-  "dependencies": ["http", "lovelace"],
+  "dependencies": [
+    "http",
+    "lovelace"
+  ],
   "documentation": "https://github.com/PhilBode/all-inclusive-fitness-HACS-Addon",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/PhilBode/all-inclusive-fitness-HACS-Addon/issues",
   "requirements": [],
   "single_config_entry": true,
-  "version": "0.1.2"
+  "version": "0.1.3"
 }

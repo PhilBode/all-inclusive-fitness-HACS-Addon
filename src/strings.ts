@@ -19,7 +19,6 @@ export const STRINGS = {
     editorCourses: "Kurse & Events heute anzeigen",
     editorWeekCourses: "Kommende Kurse & Events anzeigen",
     editorHours: "Öffnungszeiten anzeigen",
-    editorCompact: "Kompaktmodus",
   },
   en: {
     open: "Open",
@@ -40,7 +39,6 @@ export const STRINGS = {
     editorCourses: "Show courses & events today",
     editorWeekCourses: "Show upcoming courses & events",
     editorHours: "Show opening hours",
-    editorCompact: "Compact mode",
   },
 } as const;
 
