@@ -19,7 +19,7 @@ import {
   renderWeek,
 } from "./views";
 
-const CARD_CSS = new URL("ai-fitness-card.css?v=0.1.0", import.meta.url).href;
+const CARD_CSS = new URL("ai-fitness-card.css?v=0.1.1", import.meta.url).href;
 
 class AiFitnessCard extends LitElement {
   static properties = {

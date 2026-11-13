@@ -82,7 +82,7 @@ All display options are also available in the visual card editor.
 If your Home Assistant uses YAML-managed Lovelace resources, the integration cannot add the resource automatically. Add it manually:
 
 1. **Settings → Dashboards → Resources → Add resource**.
-2. URL: `/all_inclusive_fitness/ai-fitness-card.js?v=0.1.0`
+2. URL: `/all_inclusive_fitness/ai-fitness-card.js?v=0.1.1`
 3. Type: **JavaScript module**.
 
 ## Preview the card

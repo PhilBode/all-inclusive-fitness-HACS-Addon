@@ -1143,7 +1143,7 @@ function Rt(n, t) {
   }
   return e.length ? W(g(t.language, "week"), u`<div>${e}</div>`) : l;
 }
-var Jt = new URL("ai-fitness-card.css?v=0.1.0", import.meta.url).href,
+var Jt = new URL("ai-fitness-card.css?v=0.1.1", import.meta.url).href,
   nt = class extends m {
     static {
       this.properties = { hass: { attribute: !1 }, config: { attribute: !1 } };
