@@ -11,8 +11,6 @@ export interface HomeAssistant {
 
 export interface AiFitnessCardConfig {
   type?: string;
-  entity: string;
-  course_entity?: string;
   title?: string;
   show_today_forecast?: boolean;
   show_week?: boolean;

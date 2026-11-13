@@ -12,7 +12,7 @@ It shows live gym occupancy, opening hours and the course schedule. **No account
 - Next course with room, capacity and booking status.
 - Attributes: today's forecast, weekly forecast, opening hours, address and coordinates.
 - Courses for today and the next seven days.
-- One device per studio; multiple studios can be added in parallel.
+- One studio per Home Assistant instance.
 - Lovelace card with occupancy, opening hours, today's courses and weekly forecast.
 
 ## Entities
@@ -64,8 +64,6 @@ YAML is optional:
 
 ```yaml
 type: custom:ai-fitness-card
-entity: sensor.bielefeld_city_occupancy
-course_entity: sensor.bielefeld_city_next_course
 title: Bielefeld City
 show_today_forecast: true
 show_week: true
@@ -75,14 +73,14 @@ show_hours: true
 compact: false
 ```
 
-All display options are also available in the visual card editor.
+The card finds the occupancy and course sensors automatically. Only one studio is supported per Home Assistant instance.
 
-`course_entity` is optional. Without it the card shows occupancy and opening hours only.
+All display options are available in the visual card editor.
 
 If your Home Assistant uses YAML-managed Lovelace resources, the integration cannot add the resource automatically. Add it manually:
 
 1. **Settings → Dashboards → Resources → Add resource**.
-2. URL: `/all_inclusive_fitness/ai-fitness-card.js?v=0.1.1`
+2. URL: `/all_inclusive_fitness/ai-fitness-card.js?v=0.1.2`
 3. Type: **JavaScript module**.
 
 ## Preview the card

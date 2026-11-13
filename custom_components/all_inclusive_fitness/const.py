@@ -31,7 +31,7 @@ RATE_LIMIT_FALLBACK = (300, 600, 1200, 2400, 3600)
 
 CARD_STATIC_PATH = "/all_inclusive_fitness"
 CARD_PATH = f"{CARD_STATIC_PATH}/ai-fitness-card.js"
-CARD_URL = f"{CARD_PATH}?v=0.1.1"
+CARD_URL = f"{CARD_PATH}?v=0.1.2"
 
 WHITELABEL_PATH = "/whitelabelconfigs/web"
 TENANT_PATH = "/nox/public/v1/tenant"

@@ -82,8 +82,8 @@ function renderCourse(
     : "";
   const capacity =
     course.capacity && course.capacity > 0
-      ? `${course.booked ?? 0}/${course.capacity}`
-      : "";
+      ? html`${personIcon()}${course.booked ?? 0}/${course.capacity}`
+      : nothing;
 
   return html`<div class="course">
     <div class="course-time">${date}${time}</div>
@@ -104,6 +104,14 @@ function renderCourse(
     </div>
     <div class="course-capacity">${capacity}</div>
   </div>`;
+}
+
+function personIcon(): TemplateResult {
+  return html`<svg class="person" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-3.33 0-8 1.67-8 5v1h16v-1c0-3.33-4.67-5-8-5Z"
+    ></path>
+  </svg>`;
 }
 
 export function renderDayBars(

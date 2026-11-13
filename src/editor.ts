@@ -26,12 +26,18 @@ class AiFitnessCardEditor extends LitElement {
       flex-direction: column;
       gap: 12px;
     }
-    ha-formfield {
-      display: block;
-    }
-    ha-entity-picker,
     ha-textfield {
       display: block;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 40px;
+    }
+    .row-label {
+      flex: 1;
     }
   `;
 
@@ -45,22 +51,6 @@ class AiFitnessCardEditor extends LitElement {
     }
 
     return html`<div class="form">
-      <ha-entity-picker
-        .hass=${this.hass}
-        .value=${this.config.entity ?? ""}
-        .includeDomains=${["sensor"]}
-        .label=${this._t("editorEntity")}
-        @value-changed=${this._entityChanged}
-      ></ha-entity-picker>
-
-      <ha-entity-picker
-        .hass=${this.hass}
-        .value=${this.config.course_entity ?? ""}
-        .includeDomains=${["sensor"]}
-        .label=${this._t("editorCourseEntity")}
-        @value-changed=${this._courseChanged}
-      ></ha-entity-picker>
-
       <ha-textfield
         .value=${this.config.title ?? ""}
         .label=${this._t("editorTitle")}
@@ -82,20 +72,13 @@ class AiFitnessCardEditor extends LitElement {
         ? this.config?.compact === true
         : this.config?.[key] !== false;
 
-    return html`<ha-formfield .label=${this._t(label)}>
+    return html`<div class="row">
+      <span class="row-label">${this._t(label)}</span>
       <ha-switch
         .checked=${checked}
         @change=${(event: Event) => this._setBoolean(key, event)}
       ></ha-switch>
-    </ha-formfield>`;
-  }
-
-  private _entityChanged(event: CustomEvent<{ value: string }>) {
-    this._update({ entity: event.detail.value });
-  }
-
-  private _courseChanged(event: CustomEvent<{ value: string }>) {
-    this._update({ course_entity: event.detail.value || undefined });
+    </div>`;
   }
 
   private _titleChanged(event: Event) {

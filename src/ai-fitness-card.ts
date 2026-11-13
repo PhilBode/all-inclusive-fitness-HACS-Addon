@@ -19,7 +19,7 @@ import {
   renderWeek,
 } from "./views";
 
-const CARD_CSS = new URL("ai-fitness-card.css?v=0.1.1", import.meta.url).href;
+const CARD_CSS = new URL("ai-fitness-card.css?v=0.1.2", import.meta.url).href;
 
 class AiFitnessCard extends LitElement {
   static properties = {
@@ -30,19 +30,11 @@ class AiFitnessCard extends LitElement {
   declare hass?: HomeAssistant;
   declare config?: AiFitnessCardConfig;
 
-  static getStubConfig(hass: HomeAssistant) {
-    const entity = Object.keys(hass.states).find(
-      (id) =>
-        id.startsWith("sensor.") &&
-        Boolean(hass.states[id].attributes.forecast_week),
-    );
-    return { entity: entity ?? "" };
+  static getStubConfig() {
+    return {};
   }
 
   setConfig(config: AiFitnessCardConfig) {
-    if (!config?.entity) {
-      throw new Error("Please define an occupancy entity.");
-    }
     this.config = {
       show_today_forecast: true,
       show_week: true,
@@ -69,10 +61,11 @@ class AiFitnessCard extends LitElement {
       return nothing;
     }
 
-    const stateObj = hass.states[config.entity];
+    const entity = this._findOccupancyEntity();
+    const stateObj = entity ? hass.states[entity] : undefined;
     if (!stateObj) {
       return html`${this._styleLink()}<ha-card>
-          <div class="error">Entity not found: ${config.entity}</div>
+          <div class="error">${translate(hass.language, "noSensor")}</div>
         </ha-card>`;
     }
 
@@ -94,9 +87,8 @@ class AiFitnessCard extends LitElement {
       ? todayHours(attrs.opening_hours, ctx.language, ctx.timeZone)
       : "";
 
-    const courseObj = config.course_entity
-      ? hass.states[config.course_entity]
-      : undefined;
+    const courseEntity = this._findCourseEntity();
+    const courseObj = courseEntity ? hass.states[courseEntity] : undefined;
     const courseAttrs = (courseObj?.attributes ?? {}) as CourseAttributes;
     const todayCourses = courseAttrs.today ?? [];
     const todayKey = dateKey(new Date(), ctx.timeZone);
@@ -148,6 +140,23 @@ class AiFitnessCard extends LitElement {
             : nothing
         }
       </ha-card>`;
+  }
+
+  private _findOccupancyEntity(): string | undefined {
+    return Object.keys(this.hass?.states ?? {}).find(
+      (id) =>
+        id.startsWith("sensor.") &&
+        Boolean(this.hass?.states[id].attributes.forecast_week),
+    );
+  }
+
+  private _findCourseEntity(): string | undefined {
+    return Object.keys(this.hass?.states ?? {}).find(
+      (id) =>
+        id.startsWith("sensor.") &&
+        (Array.isArray(this.hass?.states[id].attributes.today) ||
+          Array.isArray(this.hass?.states[id].attributes.week)),
+    );
   }
 
   private _styleLink() {

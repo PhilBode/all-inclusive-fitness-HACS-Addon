@@ -72,15 +72,15 @@ ha-card {
   transition: width 0.4s ease;
 }
 .section {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 .section-title {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--secondary-text-color);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .daybars {
   display: flex;
@@ -114,16 +114,16 @@ ha-card {
 .courses {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 1px;
 }
 .course {
   display: grid;
-  grid-template-columns: 3.2rem 1fr auto;
-  gap: 8px;
-  align-items: baseline;
-  font-size: 0.9rem;
-  padding: 4px 0;
-  border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.08));
+  grid-template-columns: 2.9rem 1fr auto;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--divider-color, rgba(0, 0, 0, 0.06));
 }
 .course:last-child {
   border-bottom: none;
@@ -131,21 +131,33 @@ ha-card {
 .course-time {
   color: var(--secondary-text-color);
   font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
 }
 .course-name {
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .course-capacity {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   color: var(--secondary-text-color);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
+}
+.person {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: currentColor;
 }
 .tag {
   display: inline-block;
-  margin-left: 6px;
-  padding: 1px 6px;
+  margin-left: 4px;
+  padding: 0 5px;
   border-radius: 999px;
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   font-weight: 600;
   color: var(--error-color, #c62828);
   background: rgba(198, 40, 40, 0.1);
