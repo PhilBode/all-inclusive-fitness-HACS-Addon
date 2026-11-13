@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import logging
 from pathlib import Path
 
@@ -77,7 +78,14 @@ async def _async_register_card(hass: HomeAssistant) -> None:
     hass.data[DOMAIN] = True
 
 
+def _card_url() -> str:
+    card = Path(__file__).parent / "www" / "ai-fitness-card.js"
+    digest = hashlib.sha1(card.read_bytes()).hexdigest()[:10]
+    return f"{CARD_PATH}?h={digest}"
+
+
 async def _async_register_resource(hass: HomeAssistant) -> None:
+    card_url = _card_url()
     lovelace = hass.data.get(LOVELACE_DATA)
     if lovelace is None:
         return
@@ -92,8 +100,8 @@ async def _async_register_resource(hass: HomeAssistant) -> None:
 
     for item in resources.async_items():
         if str(item.get("url", "")).split("?", 1)[0] == CARD_PATH:
-            if item.get("url") != CARD_PATH and item.get("id"):
-                await resources.async_update_item(item["id"], {"url": CARD_PATH})
+            if item.get("url") != card_url and item.get("id"):
+                await resources.async_update_item(item["id"], {"url": card_url})
             return
 
-    await resources.async_create_item({"res_type": "module", "url": CARD_PATH})
+    await resources.async_create_item({"res_type": "module", "url": card_url})
