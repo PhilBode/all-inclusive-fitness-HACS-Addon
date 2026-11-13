@@ -67,10 +67,15 @@ type: custom:ai-fitness-card
 entity: sensor.bielefeld_city_occupancy
 course_entity: sensor.bielefeld_city_next_course
 title: Bielefeld City
+show_today_forecast: true
 show_week: true
 show_courses: true
+show_week_courses: true
+show_hours: true
 compact: false
 ```
+
+All display options are also available in the visual card editor.
 
 `course_entity` is optional. Without it the card shows occupancy and opening hours only.
 

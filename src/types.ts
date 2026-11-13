@@ -14,8 +14,11 @@ export interface AiFitnessCardConfig {
   entity: string;
   course_entity?: string;
   title?: string;
+  show_today_forecast?: boolean;
   show_week?: boolean;
   show_courses?: boolean;
+  show_week_courses?: boolean;
+  show_hours?: boolean;
   compact?: boolean;
 }
 

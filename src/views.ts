@@ -13,7 +13,7 @@ export function renderHeader(
   return html`<div class="header">
     <div>
       <div class="title">${title}</div>
-      <div class="subtitle">${hours}</div>
+      ${hours ? html`<div class="subtitle">${hours}</div>` : nothing}
     </div>
     <div class="badge ${open ? "open" : "closed"}">
       ${open ? translate(ctx.language, "open") : translate(ctx.language, "closed")}
