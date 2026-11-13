@@ -1,4 +1,4 @@
-import { LitElement, html, nothing } from "lit";
+import { LitElement, html, nothing, type PropertyValues } from "lit";
 
 import "./editor";
 import { dateKey, localeFor, todayHours } from "./format";
@@ -54,6 +54,23 @@ class AiFitnessCard extends LitElement {
 
   static getConfigElement() {
     return document.createElement("ai-fitness-card-editor");
+  }
+
+  protected override updated(changed: PropertyValues) {
+    super.updated(changed);
+    if (!changed.has("_detailOpen")) {
+      return;
+    }
+
+    const dialog = this.renderRoot.querySelector("dialog");
+    if (!dialog) {
+      return;
+    }
+    if (this._detailOpen && !dialog.open) {
+      dialog.showModal();
+    } else if (!this._detailOpen && dialog.open) {
+      dialog.close();
+    }
   }
 
   render() {
@@ -146,22 +163,18 @@ class AiFitnessCard extends LitElement {
             : nothing
         }
       </ha-card>
-      ${
-        this._detailOpen
-          ? this._renderDetail(
-              title,
-              open,
-              fullHours,
-              occupancy,
-              level,
-              unavailable,
-              attrs,
-              todayCourses,
-              weekCourses,
-              ctx,
-            )
-          : nothing
-      }`;
+      ${this._renderDetail(
+        title,
+        open,
+        fullHours,
+        occupancy,
+        level,
+        unavailable,
+        attrs,
+        todayCourses,
+        weekCourses,
+        ctx,
+      )}`;
   }
 
   private _renderDetail(
@@ -176,67 +189,67 @@ class AiFitnessCard extends LitElement {
     weekCourses: Course[],
     ctx: ViewContext,
   ) {
-    return html`<div class="detail-overlay" @click=${this._overlayClick}>
-      <div class="detail-panel" role="dialog" aria-modal="true">
-        <button
-          class="detail-close"
-          aria-label="Close"
-          @click=${this._closeDetail}
-        >
-          ×
-        </button>
-        <div class="detail-grid">
-          <div class="detail-left">
-            ${renderHeader(title, open, hours, ctx)}
-            ${renderOccupancy(occupancy, level, unavailable, ctx)}
-            ${
-              attrs.forecast_today?.length
-                ? renderSection(
-                    translate(ctx.language, "today"),
-                    renderDayBars(attrs.forecast_today, ctx),
-                  )
-                : nothing
-            }
-            ${
-              attrs.forecast_week
-                ? renderWeek(attrs.forecast_week, ctx)
-                : nothing
-            }
-          </div>
-          <div class="detail-right">
-            ${
-              todayCourses.length
-                ? renderCourses(
-                    translate(ctx.language, "coursesToday"),
-                    todayCourses,
-                    50,
-                    false,
-                    ctx,
-                  )
-                : nothing
-            }
-            ${
-              weekCourses.length
-                ? renderCourses(
-                    translate(ctx.language, "coursesWeek"),
-                    weekCourses,
-                    50,
-                    true,
-                    ctx,
-                  )
-                : nothing
-            }
-            ${
-              !todayCourses.length && !weekCourses.length
-                ? html`<div class="empty">
-                    ${translate(ctx.language, "noCourses")}
-                  </div>`
-                : nothing
-            }
-          </div>
+    return html`<dialog
+      class="detail-dialog"
+      @click=${this._dialogClick}
+      @close=${this._dialogClosed}
+    >
+      <button
+        class="detail-close"
+        aria-label="Close"
+        @click=${this._closeDetail}
+      >
+        ×
+      </button>
+      <div class="detail-grid">
+        <div class="detail-left">
+          ${renderHeader(title, open, hours, ctx)}
+          ${renderOccupancy(occupancy, level, unavailable, ctx)}
+          ${
+            attrs.forecast_today?.length
+              ? renderSection(
+                  translate(ctx.language, "today"),
+                  renderDayBars(attrs.forecast_today, ctx),
+                )
+              : nothing
+          }
+          ${
+            attrs.forecast_week ? renderWeek(attrs.forecast_week, ctx) : nothing
+          }
+        </div>
+        <div class="detail-right">
+          ${
+            todayCourses.length
+              ? renderCourses(
+                  translate(ctx.language, "coursesToday"),
+                  todayCourses,
+                  50,
+                  false,
+                  ctx,
+                )
+              : nothing
+          }
+          ${
+            weekCourses.length
+              ? renderCourses(
+                  translate(ctx.language, "coursesWeek"),
+                  weekCourses,
+                  50,
+                  true,
+                  ctx,
+                )
+              : nothing
+          }
+          ${
+            !todayCourses.length && !weekCourses.length
+              ? html`<div class="empty">
+                  ${translate(ctx.language, "noCourses")}
+                </div>`
+              : nothing
+          }
         </div>
       </div>
-    </div>`;
+    </dialog>`;
   }
 
   private _openDetail() {
@@ -247,10 +260,14 @@ class AiFitnessCard extends LitElement {
     this._detailOpen = false;
   }
 
-  private _overlayClick(event: Event) {
+  private _dialogClick(event: Event) {
     if (event.target === event.currentTarget) {
       this._detailOpen = false;
     }
+  }
+
+  private _dialogClosed() {
+    this._detailOpen = false;
   }
 
   private _handleCardKey(event: KeyboardEvent) {

@@ -407,7 +407,7 @@ var Y = globalThis,
   Ze = `<${ke}>`,
   b = document,
   O = () => b.createComment(""),
-  H = (n) => n === null || (typeof n != "object" && typeof n != "function"),
+  P = (n) => n === null || (typeof n != "object" && typeof n != "function"),
   ee = Array.isArray,
   qe = (n) => ee(n) || typeof n?.[Symbol.iterator] == "function",
   Z = `[ 	
@@ -489,7 +489,7 @@ var Ge = (n, e) => {
       s,
     ];
   },
-  N = class n {
+  R = class n {
     constructor({ strings: e, _$litType$: t }, s) {
       let i;
       this.parts = [];
@@ -556,7 +556,7 @@ var Ge = (n, e) => {
 function S(n, e, t = n, s) {
   if (e === C) return e;
   let i = s !== void 0 ? t._$Co?.[s] : t._$Cl,
-    o = H(e) ? void 0 : e._$litDirective$;
+    o = P(e) ? void 0 : e._$litDirective$;
   return (
     i?.constructor !== o &&
       (i?._$AO?.(!1),
@@ -594,7 +594,7 @@ var q = class {
         if (r === a.index) {
           let d;
           (a.type === 2
-            ? (d = new R(o, o.nextSibling, this, e))
+            ? (d = new H(o, o.nextSibling, this, e))
             : a.type === 1
               ? (d = new a.ctor(o, a.name, a.strings, this, e))
               : a.type === 6 && (d = new X(o, this, e)),
@@ -615,7 +615,7 @@ var q = class {
           t++);
     }
   },
-  R = class n {
+  H = class n {
     get _$AU() {
       return this._$AM?._$AU ?? this._$Cv;
     }
@@ -642,7 +642,7 @@ var q = class {
     }
     _$AI(e, t = this) {
       ((e = S(this, e, t)),
-        H(e)
+        P(e)
           ? e === c || e == null || e === ""
             ? (this._$AH !== c && this._$AR(), (this._$AH = c))
             : e !== this._$AH && e !== C && this._(e)
@@ -661,7 +661,7 @@ var q = class {
       this._$AH !== e && (this._$AR(), (this._$AH = this.O(e)));
     }
     _(e) {
-      (this._$AH !== c && H(this._$AH)
+      (this._$AH !== c && P(this._$AH)
         ? (this._$AA.nextSibling.data = e)
         : this.T(b.createTextNode(e)),
         (this._$AH = e));
@@ -672,7 +672,7 @@ var q = class {
           typeof s == "number"
             ? this._$AC(e)
             : (s.el === void 0 &&
-                (s.el = N.createElement(Te(s.h, s.h[0]), this.options)),
+                (s.el = R.createElement(Te(s.h, s.h[0]), this.options)),
               s);
       if (this._$AH?._$AD === i) this._$AH.p(t);
       else {
@@ -683,7 +683,7 @@ var q = class {
     }
     _$AC(e) {
       let t = Se.get(e.strings);
-      return (t === void 0 && Se.set(e.strings, (t = new N(e))), t);
+      return (t === void 0 && Se.set(e.strings, (t = new R(e))), t);
     }
     k(e) {
       ee(this._$AH) || ((this._$AH = []), this._$AR());
@@ -733,7 +733,7 @@ var q = class {
         r = !1;
       if (o === void 0)
         ((e = S(this, e, t, 0)),
-          (r = !H(e) || (e !== this._$AH && e !== C)),
+          (r = !P(e) || (e !== this._$AH && e !== C)),
           r && (this._$AH = e));
       else {
         let h = e,
@@ -742,7 +742,7 @@ var q = class {
         for (e = o[0], a = 0; a < o.length - 1; a++)
           ((d = S(this, h[s + a], t, a)),
             d === C && (d = this._$AH[a]),
-            (r ||= !H(d) || d !== this._$AH[a]),
+            (r ||= !P(d) || d !== this._$AH[a]),
             d === c ? (e = c) : e !== c && (e += (d ?? "") + o[a + 1]),
             (this._$AH[a] = d));
       }
@@ -809,13 +809,13 @@ var q = class {
     }
   };
 var Je = Y.litHtmlPolyfillSupport;
-(Je?.(N, R), (Y.litHtmlVersions ??= []).push("3.3.3"));
+(Je?.(R, H), (Y.litHtmlVersions ??= []).push("3.3.3"));
 var Oe = (n, e, t) => {
   let s = t?.renderBefore ?? e,
     i = s._$litPart$;
   if (i === void 0) {
     let o = t?.renderBefore ?? null;
-    s._$litPart$ = i = new R(e.insertBefore(O(), o), o, void 0, t ?? {});
+    s._$litPart$ = i = new H(e.insertBefore(O(), o), o, void 0, t ?? {});
   }
   return (i._$AI(n), i);
 };
@@ -852,7 +852,7 @@ var se = globalThis,
 var Qe = se.litElementPolyfillSupport;
 Qe?.({ LitElement: $ });
 (se.litElementVersions ??= []).push("4.2.2");
-var He = {
+var Pe = {
   de: {
     open: "Ge\xF6ffnet",
     closed: "Geschlossen",
@@ -898,7 +898,7 @@ var He = {
   },
 };
 function f(n, e) {
-  return n === "de" ? He.de[e] : He.en[e];
+  return n === "de" ? Pe.de[e] : Pe.en[e];
 }
 var ie = class extends $ {
   static {
@@ -984,10 +984,10 @@ customElements.get("ai-fitness-card-editor") ||
 function W(n) {
   return Math.max(0, Math.min(100, Number(n) || 0));
 }
-function Ne(n) {
+function Re(n) {
   return n === "de" ? "de-DE" : "en-GB";
 }
-function Re(n, e, t) {
+function He(n, e, t) {
   let s = new Date(n);
   return Number.isNaN(s.getTime())
     ? ""
@@ -997,7 +997,7 @@ function Re(n, e, t) {
         timeZone: t,
       });
 }
-function Pe(n, e, t) {
+function Ne(n, e, t) {
   let s = new Date(n);
   return Number.isNaN(s.getTime())
     ? ""
@@ -1052,14 +1052,14 @@ function ae(n, e, t, s) {
     </div>
   </div>`;
 }
-function P(n, e) {
+function N(n, e) {
   return p`<div class="section">
     <div class="section-title">${n}</div>
     ${e}
   </div>`;
 }
 function D(n, e, t, s, i) {
-  return P(
+  return N(
     n,
     p`<div class="courses">
       ${e.slice(0, t).map((o) => Xe(o, s, i))}
@@ -1067,8 +1067,8 @@ function D(n, e, t, s, i) {
   );
 }
 function Xe(n, e, t) {
-  let s = Re(n.start, t.locale, t.timeZone),
-    i = e ? `${Pe(n.start, t.locale, t.timeZone)} \xB7 ` : "",
+  let s = He(n.start, t.locale, t.timeZone),
+    i = e ? `${Ne(n.start, t.locale, t.timeZone)} \xB7 ` : "",
     o =
       n.capacity && n.capacity > 0
         ? p`${Ye()}${n.booked ?? 0}/${n.capacity}`
@@ -1133,7 +1133,7 @@ function ce(n, e) {
         <div class="weekpct">${h}%</div>
       </div>`);
   }
-  return t.length ? P(f(e.language, "week"), p`<div>${t}</div>`) : c;
+  return t.length ? N(f(e.language, "week"), p`<div>${t}</div>`) : c;
 }
 var et = new URL("ai-fitness-card.css", import.meta.url).href,
   he = class extends $ {
@@ -1167,6 +1167,14 @@ var et = new URL("ai-fitness-card.css", import.meta.url).href,
     static getConfigElement() {
       return document.createElement("ai-fitness-card-editor");
     }
+    updated(t) {
+      if ((super.updated(t), !t.has("_detailOpen"))) return;
+      let s = this.renderRoot.querySelector("dialog");
+      s &&
+        (this._detailOpen && !s.open
+          ? s.showModal()
+          : !this._detailOpen && s.open && s.close());
+    }
     render() {
       let t = this.hass,
         s = this.config;
@@ -1186,7 +1194,7 @@ var et = new URL("ai-fitness-card.css", import.meta.url).href,
         m = s.show_hours !== !1,
         g = {
           language: t.language,
-          locale: Ne(t.language),
+          locale: Re(t.language),
           timeZone: t.config?.time_zone,
         },
         v = De(r.opening_hours, g.language, g.timeZone),
@@ -1207,44 +1215,46 @@ var et = new URL("ai-fitness-card.css", import.meta.url).href,
       >
         ${re(l, u, Ue, g)}
         ${ae(a, d, h, g)}
-        ${s.show_today_forecast !== !1 && r.forecast_today?.length ? P(f(g.language, "today"), le(r.forecast_today, g)) : c}
+        ${s.show_today_forecast !== !1 && r.forecast_today?.length ? N(f(g.language, "today"), le(r.forecast_today, g)) : c}
         ${s.show_courses !== !1 && z.length ? D(f(g.language, "coursesToday"), z, 8, !1, g) : c}
         ${s.show_week !== !1 && r.forecast_week ? ce(r.forecast_week, g) : c}
         ${s.show_week_courses !== !1 && B.length ? D(f(g.language, "coursesWeek"), B, 12, !0, g) : c}
       </ha-card>
-      ${this._detailOpen ? this._renderDetail(l, u, v, a, d, h, r, z, B, g) : c}`;
+      ${this._renderDetail(l, u, v, a, d, h, r, z, B, g)}`;
     }
     _renderDetail(t, s, i, o, r, h, a, d, u, l) {
-      return p`<div class="detail-overlay" @click=${this._overlayClick}>
-      <div class="detail-panel" role="dialog" aria-modal="true">
-        <button
-          class="detail-close"
-          aria-label="Close"
-          @click=${this._closeDetail}
-        >
-          ×
-        </button>
-        <div class="detail-grid">
-          <div class="detail-left">
-            ${re(t, s, i, l)}
-            ${ae(o, r, h, l)}
-            ${a.forecast_today?.length ? P(f(l.language, "today"), le(a.forecast_today, l)) : c}
-            ${a.forecast_week ? ce(a.forecast_week, l) : c}
-          </div>
-          <div class="detail-right">
-            ${d.length ? D(f(l.language, "coursesToday"), d, 50, !1, l) : c}
-            ${u.length ? D(f(l.language, "coursesWeek"), u, 50, !0, l) : c}
-            ${
-              !d.length && !u.length
-                ? p`<div class="empty">
-                    ${f(l.language, "noCourses")}
-                  </div>`
-                : c
-            }
-          </div>
+      return p`<dialog
+      class="detail-dialog"
+      @click=${this._dialogClick}
+      @close=${this._dialogClosed}
+    >
+      <button
+        class="detail-close"
+        aria-label="Close"
+        @click=${this._closeDetail}
+      >
+        ×
+      </button>
+      <div class="detail-grid">
+        <div class="detail-left">
+          ${re(t, s, i, l)}
+          ${ae(o, r, h, l)}
+          ${a.forecast_today?.length ? N(f(l.language, "today"), le(a.forecast_today, l)) : c}
+          ${a.forecast_week ? ce(a.forecast_week, l) : c}
+        </div>
+        <div class="detail-right">
+          ${d.length ? D(f(l.language, "coursesToday"), d, 50, !1, l) : c}
+          ${u.length ? D(f(l.language, "coursesWeek"), u, 50, !0, l) : c}
+          ${
+            !d.length && !u.length
+              ? p`<div class="empty">
+                  ${f(l.language, "noCourses")}
+                </div>`
+              : c
+          }
         </div>
       </div>
-    </div>`;
+    </dialog>`;
     }
     _openDetail() {
       this._detailOpen = !0;
@@ -1252,8 +1262,11 @@ var et = new URL("ai-fitness-card.css", import.meta.url).href,
     _closeDetail() {
       this._detailOpen = !1;
     }
-    _overlayClick(t) {
+    _dialogClick(t) {
       t.target === t.currentTarget && (this._detailOpen = !1);
+    }
+    _dialogClosed() {
+      this._detailOpen = !1;
     }
     _handleCardKey(t) {
       (t.key === "Enter" || t.key === " ") &&
