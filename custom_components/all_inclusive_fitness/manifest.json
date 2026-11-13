@@ -1,6 +1,9 @@
 {
   "domain": "all_inclusive_fitness",
   "name": "All Inclusive Fitness",
+  "categories": [
+    "health_wellbeing"
+  ],
   "codeowners": [
     "@PhilBode"
   ],

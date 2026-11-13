@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from homeassistant.components.http import StaticPathConfig
@@ -21,6 +22,8 @@ from .const import (
     DOMAIN,
 )
 from .coordinator import PublicCoordinator
+
+LOGGER = logging.getLogger(__name__)
 
 PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.BINARY_SENSOR]
 
@@ -68,7 +71,10 @@ async def _async_register_card(hass: HomeAssistant) -> None:
             )
         ]
     )
-    await _async_register_resource(hass)
+    try:
+        await _async_register_resource(hass)
+    except Exception:
+        LOGGER.exception("Could not register the card resource")
     hass.data[DOMAIN] = True
 
 

@@ -128,3 +128,7 @@ All data comes from the public Magicline/MySports API used by the ai-fitness web
 - `/nox/public/v1/bookableitems/course/upcoming`
 
 The API is unofficial and has no SLA. Endpoints can change or disappear without notice. This integration is not affiliated with all inclusive Fitness or Magicline.
+
+## License
+
+MIT. Free to use, copy, modify and share.
