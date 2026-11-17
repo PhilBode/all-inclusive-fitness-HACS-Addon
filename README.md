@@ -4,6 +4,12 @@ Unofficial Home Assistant integration and Lovelace card for **all inclusive Fitn
 
 It shows live gym occupancy, opening hours and the course schedule. **No account, login or check-in data is used.** Only public endpoints are queried.
 
+The card in light and dark Home Assistant themes, with live data from **Bielefeld City**:
+
+| Light | Dark |
+| ----- | ---- |
+| ![AI Fitness card, light theme](docs/card-preview.png) | ![AI Fitness card, dark theme](docs/card-preview-dark.png) |
+
 ## Features
 
 - Studio selection by name/city or portal URL.
@@ -33,7 +39,6 @@ Large attributes (`forecast_today`, `forecast_week`, `today`, `week`, `opening_h
 1. Add `https://github.com/PhilBode/all-inclusive-fitness-HACS-Addon` as a custom integration repository in HACS.
 2. Install **All Inclusive Fitness**.
 3. Restart Home Assistant.
-4. Go to **Settings → Devices & Services → Add Integration** and search for **All Inclusive Fitness**.
 
 ### Manual
 
@@ -72,7 +77,7 @@ show_week_courses: true
 show_hours: true
 ```
 
-The card finds the occupancy and course sensors automatically. Only one studio is supported per Home Assistant instance.
+The card finds the occupancy and course sensors automatically.
 
 All display options are available in the visual card editor.
 
@@ -93,7 +98,13 @@ npm run build
 npm run preview
 ```
 
-Open <http://localhost:8080/preview/>. The preview uses mock data and does not need Home Assistant.
+Open <http://localhost:8080/preview/>. The preview loads a data snapshot from the public ai-fitness API and does not need Home Assistant. Append `?theme=dark` for the dark theme.
+
+Refresh the snapshot with:
+
+```bash
+python3 preview/fetch_live_data.py --studio "Bielefeld City"
+```
 
 ## Card development
 
